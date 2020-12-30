@@ -116,8 +116,13 @@ const getItemPublished = (node) =>
   utils.getElementTextContent(node, 'pubDate') ||
   utils.getElementTextContent(node, 'dc:date');
 
-const getMediaContent = (node) =>
-  utils.getElementTextContent(node, 'media:content');
+const getMediaContent = (node) => {
+  const mediaEls = utils.getChildElements(node, 'media:content');
+  if(mediaEls.length) {
+    return mediaEls[0].getAttribute('url');
+  }
+  return undefined
+}
 
 const getItemEnclosures = (node) => {
   const enclosures = utils.getChildElements(node, 'enclosure');
