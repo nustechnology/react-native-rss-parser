@@ -116,6 +116,9 @@ const getItemPublished = (node) =>
   utils.getElementTextContent(node, 'pubDate') ||
   utils.getElementTextContent(node, 'dc:date');
 
+const getMediaContent = (node) =>
+  utils.getElementTextContent(node, 'media:content');
+
 const getItemEnclosures = (node) => {
   const enclosures = utils.getChildElements(node, 'enclosure');
 
@@ -164,6 +167,7 @@ const mapItems = (document) => {
     published: getItemPublished(item),
     enclosures: getItemEnclosures(item),
     itunes: itunesParser.parseItem(item),
+    mediaContent: getMediaContent(item)
   }));
 };
 
